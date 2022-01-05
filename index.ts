@@ -1,5 +1,5 @@
 import uuidv4 from 'uuidv4'
-import { Optional } from 'utility-types'
+import { Omit } from 'utility-types'
 
 import { ICart } from "./interfaces/cart"
 import { IUser } from "./interfaces/user"
@@ -38,7 +38,7 @@ const createBasket = ({ user }: { user: IUser }): ICart => {
     return basket
 }
 
-const createUser = (userInput: Optional<IUser, 'id'>): IUser => {
+const createUser = (userInput: Omit<IUser, 'id'>): IUser => {
     const user: IUser = {
         ...userInput,
         id: uuidv4.uuid()
@@ -47,7 +47,7 @@ const createUser = (userInput: Optional<IUser, 'id'>): IUser => {
     return user
 }
 
-const createProduct = (productInput: Optional<ICPU, 'id'> | Optional<IRAM, 'id'> | Optional<IGPU, 'id'> | Optional<IHDD, 'id'>): IProduct => {
+const createProduct = (productInput: Omit<ICPU, 'id'> | Omit<IRAM, 'id'> | Omit<IGPU, 'id'> | Omit<IHDD, 'id'>): IProduct => {
     const product: IProduct = {
         ...productInput,
         id: uuidv4.uuid()
@@ -56,7 +56,7 @@ const createProduct = (productInput: Optional<ICPU, 'id'> | Optional<IRAM, 'id'>
     return product
 }
 
-const createProvider = (providerInput: Optional<IProvider, 'id'>): IProvider => {
+const createProvider = (providerInput: Omit<IProvider, 'id'>): IProvider => {
     const provider: IProvider = {
         ...providerInput,
         id: uuidv4.uuid()
@@ -64,7 +64,6 @@ const createProvider = (providerInput: Optional<IProvider, 'id'>): IProvider => 
 
     return provider
 }
-
 
 const user = createUser({
     name: 'John Doe',
@@ -83,7 +82,6 @@ const logitech = createProvider({
 })
 
 const mxMaster3 = createProduct({
-    id: '12',
     name: 'MX Master 3',
     price: 300,
     provider: logitech,
