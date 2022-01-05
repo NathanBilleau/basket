@@ -3,7 +3,7 @@ import { Optional } from 'utility-types'
 
 import { ICart } from "./interfaces/cart"
 import { IUser } from "./interfaces/user"
-import { IProduct } from "./interfaces/product"
+import { ICPU, IHDD, IProduct, IRAM, IGPU } from "./interfaces/product"
 import { IProvider } from './interfaces/provider'
 
 const createBasket = ({ user }: { user: IUser }): ICart => {
@@ -47,7 +47,7 @@ const createUser = (userInput: Optional<IUser, 'id'>): IUser => {
     return user
 }
 
-const createProduct = (productInput: Optional<IProduct, 'id'>): IProduct => {
+const createProduct = (productInput: Optional<ICPU, 'id'> | Optional<IRAM, 'id'> | Optional<IGPU, 'id'> | Optional<IHDD, 'id'>): IProduct => {
     const product: IProduct = {
         ...productInput,
         id: uuidv4.uuid()
@@ -77,15 +77,18 @@ const basket = createBasket({
 })
 
 
-const apple = createProvider({
-    name: 'Apple',
+const logitech = createProvider({
+    name: 'logitech',
     delay: 3
 })
 
-const m1 = createProduct({
-    name: 'Apple Silicon M1',
+const mxMaster3 = createProduct({
+    id: '12',
+    name: 'MX Master 3',
     price: 300,
-    provider: apple
+    provider: logitech,
+    cores: 2,
+    clockSpeed: 1.2
 })
 
-basket.add(m1, 2)
+basket.add(mxMaster3, 2)
