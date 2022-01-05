@@ -27,15 +27,8 @@ const createBasket = ({ user }: { user: IUser }): ICart => {
     }
 
     const totalDelay: ICart['totalDelay'] = (): number => {
-        let maxDelay = 0
-
-        items.forEach(item => {
-            if (item.product.provider.delay > maxDelay) {
-                maxDelay = item.product.provider.delay
-            }
-        })
-
-        return maxDelay
+        const delays = items.map(item => item.product.provider.delay)
+        return Math.max(...delays)
     }
     
     const basket: ICart = {
