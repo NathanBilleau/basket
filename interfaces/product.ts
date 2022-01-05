@@ -5,6 +5,7 @@ export interface IProduct {
     name: string
     price: number
     provider: IProvider
+    inStock: boolean
 }
 
 export interface ICPU extends IProduct {

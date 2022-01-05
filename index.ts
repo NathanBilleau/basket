@@ -27,7 +27,7 @@ const createBasket = ({ user }: { user: IUser }): ICart => {
     }
 
     const totalDelay: ICart['totalDelay'] = (): number => {
-        const delays = items.map(item => item.product.provider.delay)
+        const delays = items.filter(item => !item.product.inStock).map(item => item.product.provider.delay)
         return Math.max(...delays)
     }
     
@@ -92,7 +92,8 @@ const mxMaster3 = createProduct({
     price: 300,
     provider: logitech,
     cores: 2,
-    clockSpeed: 1.2
+    clockSpeed: 1.2,
+    inStock: true
 })
 
 basket.add(mxMaster3, 2)
