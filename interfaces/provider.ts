@@ -1,5 +1,5 @@
 export interface IProvider {
     id: string
     name: string
-    delay: number // in days
+    delay?: number // in days
 }

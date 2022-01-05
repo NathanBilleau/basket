@@ -22,8 +22,20 @@ const createBasket = ({ user }: { user: IUser }): ICart => {
         items = items.filter(item => item.product.id !== product.id)
     }
 
-    const total: ICart['total'] = (): number => {
+    const totalPrice: ICart['totalPrice'] = (): number => {
         return items.reduce((total, item) => total + item.product.price * item.quantity, 0)
+    }
+
+    const totalDelay: ICart['totalDelay'] = (): number => {
+        let maxDelay = 0
+
+        items.forEach(item => {
+            if (item.product.provider.delay > maxDelay) {
+                maxDelay = item.product.provider.delay
+            }
+        })
+
+        return maxDelay
     }
     
     const basket: ICart = {
@@ -32,7 +44,8 @@ const createBasket = ({ user }: { user: IUser }): ICart => {
         items,
         add,
         remove,
-        total
+        totalPrice,
+        totalDelay
     }
 
     return basket

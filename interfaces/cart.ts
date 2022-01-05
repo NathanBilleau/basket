@@ -13,5 +13,6 @@ export interface ICart {
     user: IUser
     add: (product: IProduct, quantity: number) => void
     remove: (product: IProduct) => void
-    total: () => number
+    totalPrice: () => number
+    totalDelay: () => number
 }
